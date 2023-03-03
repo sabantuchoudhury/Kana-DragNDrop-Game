@@ -2,6 +2,7 @@ const draggableListItems = document.querySelectorAll('.draggable-list li');
 const endMessage = document.getElementById('endMessage');
 const restartBtn = document.getElementById('restart');
 const stopBtn = document.getElementById('hira-kata-switch');
+const timerText = document.getElementById('timer');
 
 const timerMs = document.getElementById('timerMiliseconds');
 const timerS = document.getElementById('timerSeconds');
@@ -45,6 +46,10 @@ function dragDrop() {
         document.getElementById(dropID).style.borderBlockStyle = "outset";
         correctCounter ++;
     }
+
+    if (correctCounter === 46) {
+        timer = false;
+    }
     this.classList.remove('over');
 }
 
@@ -68,6 +73,8 @@ function addEventListeners() {
 
 // STOPCLOCK.
 restartBtn.addEventListener('click', function() {
+    timer = false;
+
     timerMinutes = 0;
     timerSeconds = 0;
     timerMiliseconds = 0;
@@ -75,6 +82,7 @@ restartBtn.addEventListener('click', function() {
     timerS.innerHTML = "00";
     timerM.innerHTML = "00";
 
+    correctCounter = 0;
     timer = true;
     startTimer();
 });
@@ -85,6 +93,8 @@ stopBtn.addEventListener('click', function() {
 
 function startTimer() {
     if (timer) {
+        timerText.style.color = '#000000';
+
         timerMiliseconds++;
         if (timerMiliseconds > 99) {
             timerSeconds++;
@@ -122,6 +132,12 @@ function startTimer() {
         timerS.innerHTML = displaySeconds;
         timerM.innerHTML = displayMinutes;
 
-        setTimeout(startTimer, 10);
+        setTimeout(startTimer, 10)
+    } else {
+        if (correctCounter === 46) {
+            timerText.style.color = "green";
+        } else {
+            timerText.style.color = "red";
+        }
     }
 }
