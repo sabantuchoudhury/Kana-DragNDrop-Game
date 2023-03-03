@@ -2,23 +2,69 @@ body {
     background-color: #000000;
 }
 
+#application {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 header {
     width: 1250px;
     height: 100px;
     text-align: center;
     font-size: 20px;
     border-style: outset;
-    background-color: #7aecec;
+    background-color: #94eed0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+}
+
+header button {
+    width: 80px;
+    height: 80px;
 }
 
 main {
     width: 1250px;
-    height: 500px;
+    height: 710px;
     background-color: #94eed0;
     border-style: outset;
-    text-align: center;
     font-size: 17px;
     
+}
+
+#middle-box {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+}
+
+#timer {
+    background-color: #7aecec;
+    padding: 5px;
+    padding-left: 30px;
+    padding-right: 30px;
+    margin-left: 60px;
+    width: 200px;
+    height: 70px;
+    border-style: groove;
+    font-size: 40px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+#instructions {
+    border-style: inset;
+    width: 855px;
+    height: 80px;
+    background-color: #86d6bc;
 }
 
 #kana-table {
@@ -29,22 +75,27 @@ main {
     justify-content: center;
 }
 
-.draggable-list ul {
-    margin: 0;
+#kana-table .draggable-list {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+}
+
+#kana-table .draggable-list li {
+    border-style: inset;
 }
 
 .draggable-list li {
     background-color: #f0ffff;
     list-style: none;
-    border-style: dotted;
+    border-style: outset;
     padding: 10px;
     margin: 10px;
     width: 20px;
     height: 20px;
     cursor: grab;
     user-select: none;
+    text-align: center;
 }
 
 .draggable-list li:hover {
