@@ -17,12 +17,45 @@ let timerMinutes = 00;
 let timerSeconds = 00;
 let timerMiliseconds = 00;
 
+const hiragana = ['あ','い','う','え','お','か','き','く','け','こ','さ','し','す','せ','そ','た','ち','つ','て','と','な','に','ぬ','ね','の','は','ひ','ふ','へ','ほ','ま','み','む','め','も','や','ゆ','よ','ら','り','る','れ','ろ','わ','を','ん'];
+const katakana = ['ア','イ','ウ','エ','オ','カ','キ','ク','ケ','コ','サ','シ','ス','セ','ソ','タ','チ','ツ','テ','ト','ナ','ニ','ヌ','ネ','ノ','ハ','ヒ','フ','ヘ','ホ','マ','ミ','ム','メ','モ','ヤ','ユ','ヨ','ラ','リ','ル','レ','ロ','ワ','ヲ','ン'];
+
+
+createOptions();
+draggableListItems.forEach((item) => {
+    console.log(item.id);
+});
 startTimer();
 addEventListeners();
 
+
+// MAKE LIST FOR OPTIONS:
+function createOptions() {
+    let array = katakana;
+    let ul = document.createElement('ul');
+    ul.setAttribute('id', 'draggable-options')
+    ul.classList.add('draggable-list');
+    let li = document.createElement('li');
+    document.querySelector('#options').appendChild(ul);
+
+    let x = 1;
+
+    array.forEach((item) => {
+        li.innerHTML += item;
+        li.setAttribute('draggable', true);
+        li.setAttribute('id', ('j' + x));
+        ul.appendChild(li);
+        li = document.createElement('li');
+        x++;
+    });
+}
+
+
+// DRAG AND DROP:
 function dragStart() {
     console.log(correctCounter)
     selectedID = this.id;
+    console.log(this.id)
 }
 
 function dragEnter() {
@@ -39,11 +72,11 @@ function dragOver(ev) {
 
 function dragDrop() {
     dropID = this.id;
-    if (checkForMatch(selectedID, dropID)) {
+    if (checkForMatch(selectedID, dropID) && timer) {
         document.getElementById(selectedID).style.display = 'none';
         document.getElementById(dropID).textContent = document.getElementById(selectedID).textContent;
-        document.getElementById(dropID).style.backgroundColor = "#4cec3d";
-        document.getElementById(dropID).style.borderBlockStyle = "outset";
+        document.getElementById(dropID).style.backgroundColor = '#4cec3d';
+        document.getElementById(dropID).style.borderBlockStyle = 'outset';
         correctCounter ++;
     }
 
@@ -54,6 +87,7 @@ function dragDrop() {
 }
 
 function checkForMatch(selectedID, dropTarget) {
+    console.log(selectedID + " " + dropTarget)
     if (selectedID.slice(1) === dropTarget.slice(1)) {
         return true;
     } else {
@@ -71,20 +105,22 @@ function addEventListeners() {
     })
 }
 
-// STOPCLOCK.
+
+// STOPCLOCK:
 restartBtn.addEventListener('click', function() {
     timer = false;
 
     timerMinutes = 0;
     timerSeconds = 0;
     timerMiliseconds = 0;
-    timerMs.innerHTML = "00";
-    timerS.innerHTML = "00";
-    timerM.innerHTML = "00";
+    timerMs.innerHTML = '00';
+    timerS.innerHTML = '00';
+    timerM.innerHTML = '00';
 
     correctCounter = 0;
     timer = true;
-    startTimer();
+
+    location.reload();
 });
 
 stopBtn.addEventListener('click', function() {
@@ -117,15 +153,15 @@ function startTimer() {
         let displayMinutes = timerMinutes;
 
         if (timerMiliseconds < 10) {
-            displayMiliseconds = "0" + timerMiliseconds;
+            displayMiliseconds = '0' + timerMiliseconds;
         }
 
         if (timerSeconds < 10) {
-            displaySeconds = "0" + timerSeconds;
+            displaySeconds = '0' + timerSeconds;
         }
 
         if (timerMinutes < 10) {
-            displayMinutes = "0" + timerMinutes;
+            displayMinutes = '0' + timerMinutes;
         }
 
         timerMs.innerHTML = displayMiliseconds;
@@ -135,9 +171,9 @@ function startTimer() {
         setTimeout(startTimer, 10)
     } else {
         if (correctCounter === 46) {
-            timerText.style.color = "green";
+            timerText.style.color = 'green';
         } else {
-            timerText.style.color = "red";
+            timerText.style.color = 'red';
         }
     }
 }
