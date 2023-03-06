@@ -1,6 +1,7 @@
 // let draggableListItems = document.querySelectorAll('.draggable-list li');
 const endMessage = document.getElementById('endMessage');
 const restartBtn = document.getElementById('restart');
+const heading = document.getElementById('heading');
 const switchBtn = document.getElementById('hira-kata-switch');
 const timerText = document.getElementById('timer');
 const timerMs = document.getElementById('timerMiliseconds');
@@ -141,6 +142,8 @@ function restartGame() {
     timerM.innerHTML = '00';
 
     correctCounter = 0;
+
+    clearTimeout(startClock);
     timer = true;
 
     for (let i = 1; i < 47; i++) {
@@ -164,9 +167,13 @@ switchBtn.addEventListener('click', function() {
     let value = switchBtn.value;
     if (value === "hiragana") {
         switchBtn.value = 'katakana';
+        switchBtn.innerText = 'HIRA';
+        heading.innerText = "Katakana Drag 'n' Drop";
         hiraganaOn = false;
     } else {
         switchBtn.value = 'hiragana';
+        switchBtn.innerText = 'KATA';
+        heading.innerText = "Hiragana Drag 'n' Drop";
         hiraganaOn = true;
     }
     restartGame();
@@ -215,7 +222,7 @@ function startTimer() {
         timerS.innerHTML = displaySeconds;
         timerM.innerHTML = displayMinutes;
 
-        setTimeout(startTimer, 10)
+        startClock = setTimeout(startTimer, 10)
     } else {
         if (correctCounter === 46) {
             timerText.style.color = 'green';

@@ -24,6 +24,10 @@ header {
     gap: 50px;
 }
 
+header h1 {
+    width: 450px;
+}
+
 header button {
     width: 60px;
     height: 60px;
@@ -67,6 +71,10 @@ main {
     height: 80px;
     font-size: 14px;
     background-color: #86d6bc;
+}
+
+#instructions li {
+    margin-bottom: 5px;
 }
 
 #kana-table {
