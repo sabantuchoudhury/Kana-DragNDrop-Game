@@ -1,5 +1,5 @@
 body {
-    background-color: #000000;
+    background-color: #f0c3eb;
     color: #000000;
 }
 
@@ -12,6 +12,7 @@ body {
 header {
     width: 850px;
     height: 80px;
+    margin-top: 50px;
     text-align: center;
     font-size: 17px;
     border-style: outset;
