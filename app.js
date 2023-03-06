@@ -27,8 +27,21 @@ addEventListeners();
 
 
 // MAKE LIST FOR OPTIONS:
+function randomiseArray(array) {
+    let currentIndex = array.length,  randomIndex;
+
+    while (currentIndex != 0) {
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex--;
+        [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+    }
+    return array;
+}
+
 function createOptions() {
-    let array = hiragana
+    let array = hiragana;
+    let orderedList = [];
+
     if (hiraganaOn == true) {
         array = hiragana;
     } else {
@@ -46,12 +59,15 @@ function createOptions() {
         li.innerHTML += item;
         li.setAttribute('draggable', true);
         li.setAttribute('id', ('j' + x));
-        ul.appendChild(li);
+        orderedList.push(li);
         li = document.createElement('li');
-
-        console.log(li.id);
-        
         x++;
+    });
+
+    let randomList = randomiseArray(orderedList);
+
+    randomList.forEach((item) => {
+        ul.appendChild(item);
     });
 
     draggableListItems = document.querySelectorAll('.draggable-list li');
