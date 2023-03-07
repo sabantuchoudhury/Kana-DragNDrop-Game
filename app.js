@@ -1,5 +1,4 @@
-// let draggableListItems = document.querySelectorAll('.draggable-list li');
-const endMessage = document.getElementById('endMessage');
+const endMessage = document.getElementById('end-message');
 const restartBtn = document.getElementById('restart');
 const heading = document.getElementById('heading');
 const switchBtn = document.getElementById('hira-kata-switch');
@@ -41,6 +40,7 @@ function randomiseArray(array) {
 
 function createOptions() {
     let array = hiragana;
+    endMessage.style.display = "none";
     let orderedList = [];
 
     if (hiraganaOn == true) {
@@ -76,10 +76,10 @@ function createOptions() {
 
 
 // DRAG AND DROP:
-function dragStart() {
+function dragStart(ev) {
     console.log(correctCounter)
     selectedID = this.id;
-    console.log(this.id)
+    // ev.dataTransfer.setDragImage(this, 30, 30);
 }
 
 function dragEnter() {
@@ -97,7 +97,7 @@ function dragOver(ev) {
 function dragDrop() {
     dropID = this.id;
     if (checkForMatch(selectedID, dropID) && timer) {
-        document.getElementById(selectedID).style.display = 'none';
+        document.getElementById(selectedID).style.visibility = 'hidden';
         document.getElementById(dropID).textContent = document.getElementById(selectedID).textContent;
         document.getElementById(dropID).style.backgroundColor = '#4cec3d';
         document.getElementById(dropID).style.borderBlockStyle = 'outset';
@@ -167,12 +167,12 @@ switchBtn.addEventListener('click', function() {
     let value = switchBtn.value;
     if (value === "hiragana") {
         switchBtn.value = 'katakana';
-        switchBtn.innerText = 'HIRA';
+        switchBtn.innerText = 'HIRAGANA';
         heading.innerText = "Katakana Drag 'n' Drop";
         hiraganaOn = false;
     } else {
         switchBtn.value = 'hiragana';
-        switchBtn.innerText = 'KATA';
+        switchBtn.innerText = 'KATAKANA';
         heading.innerText = "Hiragana Drag 'n' Drop";
         hiraganaOn = true;
     }
@@ -225,9 +225,12 @@ function startTimer() {
         startClock = setTimeout(startTimer, 10)
     } else {
         if (correctCounter === 46) {
-            timerText.style.color = 'green';
+            timerText.style.color = '#00b900';
+            let ul = document.getElementById("draggable-options");
+            ul.style.display = 'none';
+            endMessage.style.display = "block";
         } else {
-            timerText.style.color = 'red';
+            timerText.style.color = '#ff0000';
         }
     }
 }

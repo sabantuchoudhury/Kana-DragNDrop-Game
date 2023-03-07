@@ -7,6 +7,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    user-select: none;
 }
 
 header {
@@ -29,8 +30,12 @@ header h1 {
 }
 
 header button {
-    width: 60px;
-    height: 60px;
+    /* width: 60px;
+    height: 60px; */
+    width: 80px;
+    height: 40px;
+    font-size: 12px;
+    cursor: pointer;
 }
 
 main {
@@ -106,7 +111,6 @@ main {
     width: 20px;
     height: 20px;
     cursor: grab;
-    user-select: none;
     text-align: center;
 }
 
@@ -116,6 +120,12 @@ main {
 
 .over {
     background-color: #9ba7a7;
+}
+
+#end-message {
+    text-align: center;
+    font-size: 30px;
+    margin-top: 110px;
 }
 
 #options ul {
