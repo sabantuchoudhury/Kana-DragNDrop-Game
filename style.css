@@ -132,3 +132,16 @@ main {
     display: flex;
     flex-wrap: wrap;
 }
+
+footer {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background-color: #7aecec;
+    color: #000000;
+    display: flex;
+    justify-content: space-around;
+    justify-content: center;
+    flex-wrap: wrap;
+}
